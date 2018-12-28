@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xue.order.dao.SpecialShopingMapper" >
+  <resultMap id="BaseResultMap" type="com.xue.order.pojo.SpecialShoping" >
+    <result column="SPECIALID" property="specialid" jdbcType="VARCHAR" />
+    <result column="PRICE" property="price" jdbcType="VARCHAR" />
+    <result column="TIME" property="time" jdbcType="VARCHAR" />
+    <result column="KINDSID" property="kindsid" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="ISUSE" property="isuse" jdbcType="INTEGER" />
+    <result column="EXPIRE" property="expire" jdbcType="INTEGER" />
+    <result column="USERID" property="userid" jdbcType="VARCHAR" />
+    <result column="SHOPINGNAME" property="shopingname" jdbcType="VARCHAR" />
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="KINDSPARENTID" property="kindsparentid" jdbcType="VARCHAR" />
+    <result column="UNIT" property="unit" jdbcType="VARCHAR" />
+    <result column="SHOPINGCODE" property="shopingcode" jdbcType="VARCHAR" />
+    <result column="VOLUME" property="volume" jdbcType="VARCHAR" />
+    <result column="SPECIFICATIONS" property="specifications" jdbcType="VARCHAR" />
+    <result column="FLAVOR" property="flavor" jdbcType="VARCHAR" />
+    <result column="IMGURL" property="imgurl" jdbcType="VARCHAR" />
+    <result column="ORIGINALPRICE" property="originalprice" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SPECIALID, PRICE, TIME, KINDSID, REMARK, ISUSE, EXPIRE, USERID, SHOPINGNAME, ID, 
+    KINDSPARENTID, UNIT, SHOPINGCODE, VOLUME, SPECIFICATIONS, FLAVOR, IMGURL, ORIGINALPRICE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xue.order.pojo.SpecialShopingExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SPECIALSHOPING
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.xue.order.pojo.SpecialShopingExample" >
+    delete from SPECIALSHOPING
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xue.order.pojo.SpecialShoping" >
+    insert into SPECIALSHOPING (SPECIALID, PRICE, TIME, 
+      KINDSID, REMARK, ISUSE, 
+      EXPIRE, USERID, SHOPINGNAME, 
+      ID, KINDSPARENTID, UNIT, 
+      SHOPINGCODE, VOLUME, SPECIFICATIONS, 
+      FLAVOR, IMGURL, ORIGINALPRICE
+      )
+    values (#{specialid,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}, 
+      #{kindsid,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{isuse,jdbcType=INTEGER}, 
+      #{expire,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, #{shopingname,jdbcType=VARCHAR}, 
+      #{id,jdbcType=VARCHAR}, #{kindsparentid,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
+      #{shopingcode,jdbcType=VARCHAR}, #{volume,jdbcType=VARCHAR}, #{specifications,jdbcType=VARCHAR}, 
+      #{flavor,jdbcType=VARCHAR}, #{imgurl,jdbcType=VARCHAR}, #{originalprice,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xue.order.pojo.SpecialShoping" >
+    insert into SPECIALSHOPING
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="specialid != null" >
+        SPECIALID,
+      </if>
+      <if test="price != null" >
+        PRICE,
+      </if>
+      <if test="time != null" >
+        TIME,
+      </if>
+      <if test="kindsid != null" >
+        KINDSID,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="isuse != null" >
+        ISUSE,
+      </if>
+      <if test="expire != null" >
+        EXPIRE,
+      </if>
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="shopingname != null" >
+        SHOPINGNAME,
+      </if>
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="kindsparentid != null" >
+        KINDSPARENTID,
+      </if>
+      <if test="unit != null" >
+        UNIT,
+      </if>
+      <if test="shopingcode != null" >
+        SHOPINGCODE,
+      </if>
+      <if test="volume != null" >
+        VOLUME,
+      </if>
+      <if test="specifications != null" >
+        SPECIFICATIONS,
+      </if>
+      <if test="flavor != null" >
+        FLAVOR,
+      </if>
+      <if test="imgurl != null" >
+        IMGURL,
+      </if>
+      <if test="originalprice != null" >
+        ORIGINALPRICE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="specialid != null" >
+        #{specialid,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="kindsid != null" >
+        #{kindsid,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isuse != null" >
+        #{isuse,jdbcType=INTEGER},
+      </if>
+      <if test="expire != null" >
+        #{expire,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="shopingname != null" >
+        #{shopingname,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="kindsparentid != null" >
+        #{kindsparentid,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="shopingcode != null" >
+        #{shopingcode,jdbcType=VARCHAR},
+      </if>
+      <if test="volume != null" >
+        #{volume,jdbcType=VARCHAR},
+      </if>
+      <if test="specifications != null" >
+        #{specifications,jdbcType=VARCHAR},
+      </if>
+      <if test="flavor != null" >
+        #{flavor,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="originalprice != null" >
+        #{originalprice,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xue.order.pojo.SpecialShopingExample" resultType="java.lang.Integer" >
+    select count(*) from SPECIALSHOPING
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SPECIALSHOPING
+    <set >
+      <if test="record.specialid != null" >
+        SPECIALID = #{record.specialid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        PRICE = #{record.price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null" >
+        TIME = #{record.time,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kindsid != null" >
+        KINDSID = #{record.kindsid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isuse != null" >
+        ISUSE = #{record.isuse,jdbcType=INTEGER},
+      </if>
+      <if test="record.expire != null" >
+        EXPIRE = #{record.expire,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        USERID = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopingname != null" >
+        SHOPINGNAME = #{record.shopingname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kindsparentid != null" >
+        KINDSPARENTID = #{record.kindsparentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null" >
+        UNIT = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopingcode != null" >
+        SHOPINGCODE = #{record.shopingcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.volume != null" >
+        VOLUME = #{record.volume,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specifications != null" >
+        SPECIFICATIONS = #{record.specifications,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flavor != null" >
+        FLAVOR = #{record.flavor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgurl != null" >
+        IMGURL = #{record.imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalprice != null" >
+        ORIGINALPRICE = #{record.originalprice,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SPECIALSHOPING
+    set SPECIALID = #{record.specialid,jdbcType=VARCHAR},
+      PRICE = #{record.price,jdbcType=VARCHAR},
+      TIME = #{record.time,jdbcType=VARCHAR},
+      KINDSID = #{record.kindsid,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      ISUSE = #{record.isuse,jdbcType=INTEGER},
+      EXPIRE = #{record.expire,jdbcType=INTEGER},
+      USERID = #{record.userid,jdbcType=VARCHAR},
+      SHOPINGNAME = #{record.shopingname,jdbcType=VARCHAR},
+      ID = #{record.id,jdbcType=VARCHAR},
+      KINDSPARENTID = #{record.kindsparentid,jdbcType=VARCHAR},
+      UNIT = #{record.unit,jdbcType=VARCHAR},
+      SHOPINGCODE = #{record.shopingcode,jdbcType=VARCHAR},
+      VOLUME = #{record.volume,jdbcType=VARCHAR},
+      SPECIFICATIONS = #{record.specifications,jdbcType=VARCHAR},
+      FLAVOR = #{record.flavor,jdbcType=VARCHAR},
+      IMGURL = #{record.imgurl,jdbcType=VARCHAR},
+      ORIGINALPRICE = #{record.originalprice,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

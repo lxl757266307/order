@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xue.order.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.xue.order.pojo.User" >
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="ISFREE" property="isfree" jdbcType="INTEGER" />
+    <result column="USERTYPE" property="usertype" jdbcType="INTEGER" />
+    <result column="REMARK1" property="remark1" jdbcType="VARCHAR" />
+    <result column="REMARK2" property="remark2" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="IMGURL" property="imgurl" jdbcType="VARCHAR" />
+    <result column="ONLINE" property="online" jdbcType="INTEGER" />
+    <result column="CARDNUMBER" property="cardnumber" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="DATE" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="ADMINNAME" property="adminname" jdbcType="VARCHAR" />
+    <result column="REALNAME" property="realname" jdbcType="VARCHAR" />
+    <result column="SHOPPINGPHOTO" property="shoppingphoto" jdbcType="VARCHAR" />
+    <result column="KINDID" property="kindid" jdbcType="VARCHAR" />
+    <result column="BANDCARD" property="bandcard" jdbcType="VARCHAR" />
+    <result column="PAYCODEPHOTO" property="paycodephoto" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, USERNAME, PASSWORD, ADDRESS, ISFREE, USERTYPE, REMARK1, REMARK2, PHONE, IMGURL, 
+    ONLINE, CARDNUMBER, CREATETIME, STATUS, ADMINNAME, REALNAME, SHOPPINGPHOTO, KINDID, 
+    BANDCARD, PAYCODEPHOTO
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xue.order.pojo.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.xue.order.pojo.UserExample" >
+    delete from USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xue.order.pojo.User" >
+    insert into USER (ID, USERNAME, PASSWORD, 
+      ADDRESS, ISFREE, USERTYPE, 
+      REMARK1, REMARK2, PHONE, 
+      IMGURL, ONLINE, CARDNUMBER, 
+      CREATETIME, STATUS, ADMINNAME, 
+      REALNAME, SHOPPINGPHOTO, KINDID, 
+      BANDCARD, PAYCODEPHOTO)
+    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{isfree,jdbcType=INTEGER}, #{usertype,jdbcType=INTEGER}, 
+      #{remark1,jdbcType=VARCHAR}, #{remark2,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{imgurl,jdbcType=VARCHAR}, #{online,jdbcType=INTEGER}, #{cardnumber,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=DATE}, #{status,jdbcType=INTEGER}, #{adminname,jdbcType=VARCHAR}, 
+      #{realname,jdbcType=VARCHAR}, #{shoppingphoto,jdbcType=VARCHAR}, #{kindid,jdbcType=VARCHAR}, 
+      #{bandcard,jdbcType=VARCHAR}, #{paycodephoto,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xue.order.pojo.User" >
+    insert into USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="isfree != null" >
+        ISFREE,
+      </if>
+      <if test="usertype != null" >
+        USERTYPE,
+      </if>
+      <if test="remark1 != null" >
+        REMARK1,
+      </if>
+      <if test="remark2 != null" >
+        REMARK2,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="imgurl != null" >
+        IMGURL,
+      </if>
+      <if test="online != null" >
+        ONLINE,
+      </if>
+      <if test="cardnumber != null" >
+        CARDNUMBER,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="adminname != null" >
+        ADMINNAME,
+      </if>
+      <if test="realname != null" >
+        REALNAME,
+      </if>
+      <if test="shoppingphoto != null" >
+        SHOPPINGPHOTO,
+      </if>
+      <if test="kindid != null" >
+        KINDID,
+      </if>
+      <if test="bandcard != null" >
+        BANDCARD,
+      </if>
+      <if test="paycodephoto != null" >
+        PAYCODEPHOTO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="isfree != null" >
+        #{isfree,jdbcType=INTEGER},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="remark1 != null" >
+        #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="online != null" >
+        #{online,jdbcType=INTEGER},
+      </if>
+      <if test="cardnumber != null" >
+        #{cardnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="adminname != null" >
+        #{adminname,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingphoto != null" >
+        #{shoppingphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="kindid != null" >
+        #{kindid,jdbcType=VARCHAR},
+      </if>
+      <if test="bandcard != null" >
+        #{bandcard,jdbcType=VARCHAR},
+      </if>
+      <if test="paycodephoto != null" >
+        #{paycodephoto,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xue.order.pojo.UserExample" resultType="java.lang.Integer" >
+    select count(*) from USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update USER
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        USERNAME = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        PASSWORD = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isfree != null" >
+        ISFREE = #{record.isfree,jdbcType=INTEGER},
+      </if>
+      <if test="record.usertype != null" >
+        USERTYPE = #{record.usertype,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark1 != null" >
+        REMARK1 = #{record.remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark2 != null" >
+        REMARK2 = #{record.remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        PHONE = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgurl != null" >
+        IMGURL = #{record.imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.online != null" >
+        ONLINE = #{record.online,jdbcType=INTEGER},
+      </if>
+      <if test="record.cardnumber != null" >
+        CARDNUMBER = #{record.cardnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        CREATETIME = #{record.createtime,jdbcType=DATE},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminname != null" >
+        ADMINNAME = #{record.adminname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realname != null" >
+        REALNAME = #{record.realname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shoppingphoto != null" >
+        SHOPPINGPHOTO = #{record.shoppingphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kindid != null" >
+        KINDID = #{record.kindid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bandcard != null" >
+        BANDCARD = #{record.bandcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paycodephoto != null" >
+        PAYCODEPHOTO = #{record.paycodephoto,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update USER
+    set ID = #{record.id,jdbcType=VARCHAR},
+      USERNAME = #{record.username,jdbcType=VARCHAR},
+      PASSWORD = #{record.password,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      ISFREE = #{record.isfree,jdbcType=INTEGER},
+      USERTYPE = #{record.usertype,jdbcType=INTEGER},
+      REMARK1 = #{record.remark1,jdbcType=VARCHAR},
+      REMARK2 = #{record.remark2,jdbcType=VARCHAR},
+      PHONE = #{record.phone,jdbcType=VARCHAR},
+      IMGURL = #{record.imgurl,jdbcType=VARCHAR},
+      ONLINE = #{record.online,jdbcType=INTEGER},
+      CARDNUMBER = #{record.cardnumber,jdbcType=VARCHAR},
+      CREATETIME = #{record.createtime,jdbcType=DATE},
+      STATUS = #{record.status,jdbcType=INTEGER},
+      ADMINNAME = #{record.adminname,jdbcType=VARCHAR},
+      REALNAME = #{record.realname,jdbcType=VARCHAR},
+      SHOPPINGPHOTO = #{record.shoppingphoto,jdbcType=VARCHAR},
+      KINDID = #{record.kindid,jdbcType=VARCHAR},
+      BANDCARD = #{record.bandcard,jdbcType=VARCHAR},
+      PAYCODEPHOTO = #{record.paycodephoto,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

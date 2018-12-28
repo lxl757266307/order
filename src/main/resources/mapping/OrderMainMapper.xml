@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xue.order.dao.OrderMainMapper" >
+  <resultMap id="BaseResultMap" type="com.xue.order.pojo.OrderMain" >
+    <result column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+    <result column="SINGLE_PERSON" property="singlePerson" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="DATE" />
+    <result column="TOTAL_NUMBER" property="totalNumber" jdbcType="DECIMAL" />
+    <result column="TOTAL_MONEY" property="totalMoney" jdbcType="DECIMAL" />
+    <result column="UPDATE_PERSON" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="ADDRESS_ID" property="addressId" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="DATE" />
+    <result column="KINDS_ID" property="kindsId" jdbcType="VARCHAR" />
+    <result column="KINDS_PRICE" property="kindsPrice" jdbcType="DECIMAL" />
+    <result column="KINDS_NUMBER" property="kindsNumber" jdbcType="DECIMAL" />
+    <result column="TOTAL_MONEEY" property="totalMoneey" jdbcType="DECIMAL" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="LOGITICS_ID" property="logiticsId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ORDER_ID, SINGLE_PERSON, CREATE_TIME, TOTAL_NUMBER, TOTAL_MONEY, UPDATE_PERSON, ADDRESS_ID, 
+    UPDATE_TIME, KINDS_ID, KINDS_PRICE, KINDS_NUMBER, TOTAL_MONEEY, USER_ID, LOGITICS_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xue.order.pojo.OrderMainExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ORDER_MAIN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.xue.order.pojo.OrderMainExample" >
+    delete from ORDER_MAIN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xue.order.pojo.OrderMain" >
+    insert into ORDER_MAIN (ORDER_ID, SINGLE_PERSON, CREATE_TIME, 
+      TOTAL_NUMBER, TOTAL_MONEY, UPDATE_PERSON, 
+      ADDRESS_ID, UPDATE_TIME, KINDS_ID, 
+      KINDS_PRICE, KINDS_NUMBER, TOTAL_MONEEY, 
+      USER_ID, LOGITICS_ID)
+    values (#{orderId,jdbcType=VARCHAR}, #{singlePerson,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
+      #{totalNumber,jdbcType=DECIMAL}, #{totalMoney,jdbcType=DECIMAL}, #{updatePerson,jdbcType=VARCHAR}, 
+      #{addressId,jdbcType=VARCHAR}, #{updateTime,jdbcType=DATE}, #{kindsId,jdbcType=VARCHAR}, 
+      #{kindsPrice,jdbcType=DECIMAL}, #{kindsNumber,jdbcType=DECIMAL}, #{totalMoneey,jdbcType=DECIMAL}, 
+      #{userId,jdbcType=VARCHAR}, #{logiticsId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xue.order.pojo.OrderMain" >
+    insert into ORDER_MAIN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="singlePerson != null" >
+        SINGLE_PERSON,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="totalNumber != null" >
+        TOTAL_NUMBER,
+      </if>
+      <if test="totalMoney != null" >
+        TOTAL_MONEY,
+      </if>
+      <if test="updatePerson != null" >
+        UPDATE_PERSON,
+      </if>
+      <if test="addressId != null" >
+        ADDRESS_ID,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="kindsId != null" >
+        KINDS_ID,
+      </if>
+      <if test="kindsPrice != null" >
+        KINDS_PRICE,
+      </if>
+      <if test="kindsNumber != null" >
+        KINDS_NUMBER,
+      </if>
+      <if test="totalMoneey != null" >
+        TOTAL_MONEEY,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="logiticsId != null" >
+        LOGITICS_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="singlePerson != null" >
+        #{singlePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="totalNumber != null" >
+        #{totalNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="totalMoney != null" >
+        #{totalMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="updatePerson != null" >
+        #{updatePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="addressId != null" >
+        #{addressId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="kindsId != null" >
+        #{kindsId,jdbcType=VARCHAR},
+      </if>
+      <if test="kindsPrice != null" >
+        #{kindsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="kindsNumber != null" >
+        #{kindsNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="totalMoneey != null" >
+        #{totalMoneey,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="logiticsId != null" >
+        #{logiticsId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xue.order.pojo.OrderMainExample" resultType="java.lang.Integer" >
+    select count(*) from ORDER_MAIN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ORDER_MAIN
+    <set >
+      <if test="record.orderId != null" >
+        ORDER_ID = #{record.orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.singlePerson != null" >
+        SINGLE_PERSON = #{record.singlePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=DATE},
+      </if>
+      <if test="record.totalNumber != null" >
+        TOTAL_NUMBER = #{record.totalNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalMoney != null" >
+        TOTAL_MONEY = #{record.totalMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.updatePerson != null" >
+        UPDATE_PERSON = #{record.updatePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressId != null" >
+        ADDRESS_ID = #{record.addressId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=DATE},
+      </if>
+      <if test="record.kindsId != null" >
+        KINDS_ID = #{record.kindsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kindsPrice != null" >
+        KINDS_PRICE = #{record.kindsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.kindsNumber != null" >
+        KINDS_NUMBER = #{record.kindsNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalMoneey != null" >
+        TOTAL_MONEEY = #{record.totalMoneey,jdbcType=DECIMAL},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logiticsId != null" >
+        LOGITICS_ID = #{record.logiticsId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ORDER_MAIN
+    set ORDER_ID = #{record.orderId,jdbcType=VARCHAR},
+      SINGLE_PERSON = #{record.singlePerson,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=DATE},
+      TOTAL_NUMBER = #{record.totalNumber,jdbcType=DECIMAL},
+      TOTAL_MONEY = #{record.totalMoney,jdbcType=DECIMAL},
+      UPDATE_PERSON = #{record.updatePerson,jdbcType=VARCHAR},
+      ADDRESS_ID = #{record.addressId,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=DATE},
+      KINDS_ID = #{record.kindsId,jdbcType=VARCHAR},
+      KINDS_PRICE = #{record.kindsPrice,jdbcType=DECIMAL},
+      KINDS_NUMBER = #{record.kindsNumber,jdbcType=DECIMAL},
+      TOTAL_MONEEY = #{record.totalMoneey,jdbcType=DECIMAL},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      LOGITICS_ID = #{record.logiticsId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xue.order.dao.KindsMapper" >
+  <resultMap id="BaseResultMap" type="com.xue.order.pojo.Kinds" >
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="SHOPINGNAME" property="shopingname" jdbcType="VARCHAR" />
+    <result column="KINDSPARENTID" property="kindsparentid" jdbcType="VARCHAR" />
+    <result column="PRICEINPROVINCE" property="priceinprovince" jdbcType="INTEGER" />
+    <result column="PRICEOUTPROVINCE" property="priceoutprovince" jdbcType="INTEGER" />
+    <result column="SPECIFICATIONS" property="specifications" jdbcType="VARCHAR" />
+    <result column="FLAVOR" property="flavor" jdbcType="VARCHAR" />
+    <result column="UNIT" property="unit" jdbcType="VARCHAR" />
+    <result column="ISAPPLYAFTERSALE" property="isapplyaftersale" jdbcType="INTEGER" />
+    <result column="ISSPECIALOFFER" property="isspecialoffer" jdbcType="INTEGER" />
+    <result column="SHOPINGTOTAL" property="shopingtotal" jdbcType="DECIMAL" />
+    <result column="SHOPINGNUMBER" property="shopingnumber" jdbcType="VARCHAR" />
+    <result column="IMGURL" property="imgurl" jdbcType="VARCHAR" />
+    <result column="USERID" property="userid" jdbcType="VARCHAR" />
+    <result column="ISUSE" property="isuse" jdbcType="INTEGER" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="REMARK1" property="remark1" jdbcType="VARCHAR" />
+    <result column="REMARK2" property="remark2" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="DATE" />
+    <result column="SHOPINGCODE" property="shopingcode" jdbcType="VARCHAR" />
+    <result column="VOLUME" property="volume" jdbcType="VARCHAR" />
+    <result column="WEIGHT" property="weight" jdbcType="VARCHAR" />
+    <result column="ISASSUMELOGISTICS" property="isassumelogistics" jdbcType="INTEGER" />
+    <result column="ISNEW" property="isnew" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, SHOPINGNAME, KINDSPARENTID, PRICEINPROVINCE, PRICEOUTPROVINCE, SPECIFICATIONS, 
+    FLAVOR, UNIT, ISAPPLYAFTERSALE, ISSPECIALOFFER, SHOPINGTOTAL, SHOPINGNUMBER, IMGURL, 
+    USERID, ISUSE, REMARK, REMARK1, REMARK2, CREATETIME, SHOPINGCODE, VOLUME, WEIGHT, 
+    ISASSUMELOGISTICS, ISNEW
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xue.order.pojo.KindsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from KINDS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.xue.order.pojo.KindsExample" >
+    delete from KINDS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xue.order.pojo.Kinds" >
+    insert into KINDS (ID, SHOPINGNAME, KINDSPARENTID, 
+      PRICEINPROVINCE, PRICEOUTPROVINCE, SPECIFICATIONS, 
+      FLAVOR, UNIT, ISAPPLYAFTERSALE, 
+      ISSPECIALOFFER, SHOPINGTOTAL, SHOPINGNUMBER, 
+      IMGURL, USERID, ISUSE, 
+      REMARK, REMARK1, REMARK2, 
+      CREATETIME, SHOPINGCODE, VOLUME, 
+      WEIGHT, ISASSUMELOGISTICS, ISNEW
+      )
+    values (#{id,jdbcType=VARCHAR}, #{shopingname,jdbcType=VARCHAR}, #{kindsparentid,jdbcType=VARCHAR}, 
+      #{priceinprovince,jdbcType=INTEGER}, #{priceoutprovince,jdbcType=INTEGER}, #{specifications,jdbcType=VARCHAR}, 
+      #{flavor,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{isapplyaftersale,jdbcType=INTEGER}, 
+      #{isspecialoffer,jdbcType=INTEGER}, #{shopingtotal,jdbcType=DECIMAL}, #{shopingnumber,jdbcType=VARCHAR}, 
+      #{imgurl,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{isuse,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{remark1,jdbcType=VARCHAR}, #{remark2,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=DATE}, #{shopingcode,jdbcType=VARCHAR}, #{volume,jdbcType=VARCHAR}, 
+      #{weight,jdbcType=VARCHAR}, #{isassumelogistics,jdbcType=INTEGER}, #{isnew,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xue.order.pojo.Kinds" >
+    insert into KINDS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="shopingname != null" >
+        SHOPINGNAME,
+      </if>
+      <if test="kindsparentid != null" >
+        KINDSPARENTID,
+      </if>
+      <if test="priceinprovince != null" >
+        PRICEINPROVINCE,
+      </if>
+      <if test="priceoutprovince != null" >
+        PRICEOUTPROVINCE,
+      </if>
+      <if test="specifications != null" >
+        SPECIFICATIONS,
+      </if>
+      <if test="flavor != null" >
+        FLAVOR,
+      </if>
+      <if test="unit != null" >
+        UNIT,
+      </if>
+      <if test="isapplyaftersale != null" >
+        ISAPPLYAFTERSALE,
+      </if>
+      <if test="isspecialoffer != null" >
+        ISSPECIALOFFER,
+      </if>
+      <if test="shopingtotal != null" >
+        SHOPINGTOTAL,
+      </if>
+      <if test="shopingnumber != null" >
+        SHOPINGNUMBER,
+      </if>
+      <if test="imgurl != null" >
+        IMGURL,
+      </if>
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="isuse != null" >
+        ISUSE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="remark1 != null" >
+        REMARK1,
+      </if>
+      <if test="remark2 != null" >
+        REMARK2,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="shopingcode != null" >
+        SHOPINGCODE,
+      </if>
+      <if test="volume != null" >
+        VOLUME,
+      </if>
+      <if test="weight != null" >
+        WEIGHT,
+      </if>
+      <if test="isassumelogistics != null" >
+        ISASSUMELOGISTICS,
+      </if>
+      <if test="isnew != null" >
+        ISNEW,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="shopingname != null" >
+        #{shopingname,jdbcType=VARCHAR},
+      </if>
+      <if test="kindsparentid != null" >
+        #{kindsparentid,jdbcType=VARCHAR},
+      </if>
+      <if test="priceinprovince != null" >
+        #{priceinprovince,jdbcType=INTEGER},
+      </if>
+      <if test="priceoutprovince != null" >
+        #{priceoutprovince,jdbcType=INTEGER},
+      </if>
+      <if test="specifications != null" >
+        #{specifications,jdbcType=VARCHAR},
+      </if>
+      <if test="flavor != null" >
+        #{flavor,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="isapplyaftersale != null" >
+        #{isapplyaftersale,jdbcType=INTEGER},
+      </if>
+      <if test="isspecialoffer != null" >
+        #{isspecialoffer,jdbcType=INTEGER},
+      </if>
+      <if test="shopingtotal != null" >
+        #{shopingtotal,jdbcType=DECIMAL},
+      </if>
+      <if test="shopingnumber != null" >
+        #{shopingnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="isuse != null" >
+        #{isuse,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null" >
+        #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="shopingcode != null" >
+        #{shopingcode,jdbcType=VARCHAR},
+      </if>
+      <if test="volume != null" >
+        #{volume,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="isassumelogistics != null" >
+        #{isassumelogistics,jdbcType=INTEGER},
+      </if>
+      <if test="isnew != null" >
+        #{isnew,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xue.order.pojo.KindsExample" resultType="java.lang.Integer" >
+    select count(*) from KINDS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update KINDS
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopingname != null" >
+        SHOPINGNAME = #{record.shopingname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kindsparentid != null" >
+        KINDSPARENTID = #{record.kindsparentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceinprovince != null" >
+        PRICEINPROVINCE = #{record.priceinprovince,jdbcType=INTEGER},
+      </if>
+      <if test="record.priceoutprovince != null" >
+        PRICEOUTPROVINCE = #{record.priceoutprovince,jdbcType=INTEGER},
+      </if>
+      <if test="record.specifications != null" >
+        SPECIFICATIONS = #{record.specifications,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flavor != null" >
+        FLAVOR = #{record.flavor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null" >
+        UNIT = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isapplyaftersale != null" >
+        ISAPPLYAFTERSALE = #{record.isapplyaftersale,jdbcType=INTEGER},
+      </if>
+      <if test="record.isspecialoffer != null" >
+        ISSPECIALOFFER = #{record.isspecialoffer,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopingtotal != null" >
+        SHOPINGTOTAL = #{record.shopingtotal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shopingnumber != null" >
+        SHOPINGNUMBER = #{record.shopingnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgurl != null" >
+        IMGURL = #{record.imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null" >
+        USERID = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isuse != null" >
+        ISUSE = #{record.isuse,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark1 != null" >
+        REMARK1 = #{record.remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark2 != null" >
+        REMARK2 = #{record.remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        CREATETIME = #{record.createtime,jdbcType=DATE},
+      </if>
+      <if test="record.shopingcode != null" >
+        SHOPINGCODE = #{record.shopingcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.volume != null" >
+        VOLUME = #{record.volume,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weight != null" >
+        WEIGHT = #{record.weight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isassumelogistics != null" >
+        ISASSUMELOGISTICS = #{record.isassumelogistics,jdbcType=INTEGER},
+      </if>
+      <if test="record.isnew != null" >
+        ISNEW = #{record.isnew,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update KINDS
+    set ID = #{record.id,jdbcType=VARCHAR},
+      SHOPINGNAME = #{record.shopingname,jdbcType=VARCHAR},
+      KINDSPARENTID = #{record.kindsparentid,jdbcType=VARCHAR},
+      PRICEINPROVINCE = #{record.priceinprovince,jdbcType=INTEGER},
+      PRICEOUTPROVINCE = #{record.priceoutprovince,jdbcType=INTEGER},
+      SPECIFICATIONS = #{record.specifications,jdbcType=VARCHAR},
+      FLAVOR = #{record.flavor,jdbcType=VARCHAR},
+      UNIT = #{record.unit,jdbcType=VARCHAR},
+      ISAPPLYAFTERSALE = #{record.isapplyaftersale,jdbcType=INTEGER},
+      ISSPECIALOFFER = #{record.isspecialoffer,jdbcType=INTEGER},
+      SHOPINGTOTAL = #{record.shopingtotal,jdbcType=DECIMAL},
+      SHOPINGNUMBER = #{record.shopingnumber,jdbcType=VARCHAR},
+      IMGURL = #{record.imgurl,jdbcType=VARCHAR},
+      USERID = #{record.userid,jdbcType=VARCHAR},
+      ISUSE = #{record.isuse,jdbcType=INTEGER},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      REMARK1 = #{record.remark1,jdbcType=VARCHAR},
+      REMARK2 = #{record.remark2,jdbcType=VARCHAR},
+      CREATETIME = #{record.createtime,jdbcType=DATE},
+      SHOPINGCODE = #{record.shopingcode,jdbcType=VARCHAR},
+      VOLUME = #{record.volume,jdbcType=VARCHAR},
+      WEIGHT = #{record.weight,jdbcType=VARCHAR},
+      ISASSUMELOGISTICS = #{record.isassumelogistics,jdbcType=INTEGER},
+      ISNEW = #{record.isnew,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
