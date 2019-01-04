@@ -31,8 +31,8 @@ public interface SpecialPriceMapper {
     @Select("SELECT * FROM SPECIALPRICE WHERE KINDSID=#{id}")
     SpecialPrice selectSpecialPriceById(@Param("id") String id);
 
-    @Delete("DELETE SPECIALPRICE  WHERE KINDSID=#{id}")
-    SpecialPrice deleteSpecialPriceById(@Param("id") String id);
+    @Delete("DELETE FROM SPECIALPRICE  WHERE KINDSID=#{id} AND ISUSE=1")
+    int deleteSpecialPriceById(@Param("id") String id);
 
     @Select("SELECT\n" +
             "count(`USER`.ID)\n" +

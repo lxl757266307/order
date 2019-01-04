@@ -76,6 +76,7 @@ public class KindsController {
 
     /**
      * 更新新品的状态
+     *
      * @param kinds
      * @return
      */
@@ -155,6 +156,13 @@ public class KindsController {
     public @ResponseBody
     ResultBean<List<Kinds>> selectShopKindsLikeXX(@RequestParam String userId, @RequestParam("content") String content) {
         return kindsService.selectShopKindsLikeXX(userId, content);
+    }
+
+
+    @RequestMapping(value = {"/selectNewKinds"}, produces = {"application/json;charset=UTF-8"}, method = RequestMethod.GET)
+    public @ResponseBody
+    ResultBean<List<Kinds>> selectNewKinds(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize) {
+        return kindsService.selectNewKinds(page, pageSize);
     }
 
 }

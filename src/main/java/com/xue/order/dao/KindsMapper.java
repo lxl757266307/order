@@ -136,4 +136,35 @@ public interface KindsMapper {
     )
     List<Kinds> selectShopKindsLikeXX(@Param("name") String name, @Param("code") String code, @Param("userId") String userId);
 
+
+    @Select("SELECT\n" +
+            "KINDS.ID,\n" +
+            "KINDS.SHOPINGNAME,\n" +
+            "KINDS.KINDSPARENTID,\n" +
+            "KINDS.PRICEINPROVINCE,\n" +
+            "KINDS.PRICEOUTPROVINCE,\n" +
+            "KINDS.SPECIFICATIONS,\n" +
+            "KINDS.FLAVOR,\n" +
+            "KINDS.UNIT,\n" +
+            "KINDS.ISAPPLYAFTERSALE,\n" +
+            "KINDS.ISSPECIALOFFER,\n" +
+            "KINDS.SHOPINGTOTAL,\n" +
+            "KINDS.SHOPINGNUMBER,\n" +
+            "KINDS.IMGURL,\n" +
+            "KINDS.USERID,\n" +
+            "KINDS.ISUSE,\n" +
+            "KINDS.REMARK,\n" +
+            "KINDS.REMARK1,\n" +
+            "KINDS.REMARK2,\n" +
+            "KINDS.CREATETIME,\n" +
+            "KINDS.SHOPINGCODE,\n" +
+            "KINDS.VOLUME,\n" +
+            "KINDS.WEIGHT,\n" +
+            "KINDS.ISASSUMELOGISTICS,\n" +
+            "KINDS.ISNEW\n" +
+            "FROM `KINDS`\n" +
+            "WHERE ISNEW=1"
+    )
+    List<Kinds> selectNewKinds();//查询寻品
+
 }

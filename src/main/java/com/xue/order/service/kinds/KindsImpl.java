@@ -27,9 +27,8 @@ public class KindsImpl implements KindsService {
     @Override
     public ResultBean insertKinds(Kinds kinds) {
 
-        System.out.println("kinds==" + kinds);
+        System.out.println("kinds1111==" + kinds);
 
-        ResultBean resultBean = new ResultBean();
         if (kinds == null) {
             return ResultUtils.parameterErr();
         }
@@ -264,6 +263,22 @@ public class KindsImpl implements KindsService {
             return ResultUtils.success("");
         }
         return ResultUtils.err();
+    }
+
+    @Override
+    public ResultBean<List<Kinds>> selectNewKinds(int page, int pageSize) {
+        PageHelper.startPage(page, pageSize);
+        List<Kinds> kinds = kindsMapper.selectNewKinds();
+        if (kinds == null) {
+            return ResultUtils.noData();
+        }
+
+        if (kinds.size() <= 0) {
+            return ResultUtils.noData();
+        }
+
+        return ResultUtils.successData(kinds);
+
     }
 
 

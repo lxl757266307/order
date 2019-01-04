@@ -38,8 +38,6 @@ public class Jobs {
                         specialPriceMapper.updateSpecialStatus(0, specialShopings.get(i).getKindsid());
                         kindsMapper.updateKindsSpecialOfferById(0, specialShopings.get(i).getKindsid());
                     }
-
-
                 }
             }
         }

@@ -39,4 +39,7 @@ public interface KindsService {
     ResultBean<List<Kinds>> selectShopKindsLikeXX(String userId, String content);
 
     ResultBean updateNewById(Kinds kinds);
+
+    ResultBean<List<Kinds>> selectNewKinds(int page, int pageSize);
+
 }

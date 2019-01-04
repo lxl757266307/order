@@ -11,6 +11,7 @@ import com.xue.order.util.tool.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -66,15 +67,22 @@ public class SpecialPriceImpl implements SpecialPriceService {
     public ResultBean<List<SpecialShoping>> selectAllSpecialPrice(int page, int pageSize) {
         PageHelper.startPage(page, pageSize);
         List<SpecialShoping> specialPrices = specialShopingMapper.selectByExample(new SpecialShopingExample());
+        List<SpecialShoping> specialPrices2 = new ArrayList<>();
+
         for (int i = 0; i < specialPrices.size(); i++) {
-            if (jedisClient.get(specialPrices.get(i).getSpecialid()) == null) {
-                specialPrices.remove(i);
+            SpecialShoping specialShoping = specialPrices.get(i);
+            String s = jedisClient.get(specialShoping.getSpecialid());
+            if (s != null) {
+                specialPrices2.add(specialShoping);
+            }else {
+                specialPriceMapper.deleteSpecialPriceById(specialShoping.getKindsid());
             }
         }
-        if (specialPrices != null) {
-            return ResultUtils.successData(specialPrices);
+        if (specialPrices2.size() > 0) {
+            return ResultUtils.successData(specialPrices2);
+        } else {
+            return ResultUtils.noData();
         }
-        return ResultUtils.err();
     }
 
     @Override
